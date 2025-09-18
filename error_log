@@ -1,0 +1,4 @@
+[26-Feb-2024 06:00:02 UTC] PHP Fatal error:  Cannot use [] for reading in /home/webhostingserver/public_html/storage/framework/views/6097a4efe377354161269bc8d231e47b.php on line 78
+[30-Jun-2025 10:56:49 UTC] PHP Fatal error:  Namespace declaration statement has to be the very first statement or after any declare call in the script in /home/xlserp/public_html/customersupport/app/Console/Commands/TestWebSocket.php on line 3
+[22-Jul-2025 06:25:57 UTC] PHP Fatal error:  Namespace declaration statement has to be the very first statement or after any declare call in the script in /home/xlserp/public_html/customersupport/app/Console/Commands/TestWebSocket.php on line 3
+[22-Jul-2025 06:28:07 UTC] PHP Fatal error:  Namespace declaration statement has to be the very first statement or after any declare call in the script in /home/xlserp/public_html/customersupport/app/Console/Commands/TestWebSocket.php on line 3
