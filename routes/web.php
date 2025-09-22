@@ -71,6 +71,7 @@ Route::group(['middleware' => ['admin.auth','track.user.activity']], function ()
 
         Route::get('admindashboard', [AdminHomeController::class, 'index'])->name('admin.dashboard');
         Route::get('admin/registeredusers/', [AdminRegisteredUsersController::class, 'registeredusers'])->name('admin.registeredusers');
+        Route::get('admin/register-service-members/', [AdminRegisteredUsersController::class, 'registeredService'])->name('admin.register-service');
         Route::get('admin/registeredteammembers/', [AdminRegisteredUsersController::class, 'registeredteammembers'])->name('admin.registeredteammembers');
         Route::get('admin/registeredusers/edit/{id}', [AdminRegisteredUsersController::class, 'useredit'])->name('admin.registeredusers.edit');
         Route::put('admin/registeredusers/update/{id}', [AdminRegisteredUsersController::class, 'userupdate'])->name('admin.registeredusers.update');

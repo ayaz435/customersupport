@@ -1,5 +1,11 @@
 @extends('admin.layout.navbar')
 @section('content')
+<style>
+    .select2-selection.select2-selection--single {
+        height: 35px !important;
+        padding-top: 4px !important;
+    }
+</style>
     <div class="main-content">
         <div class="breadcrumb">
             <h1>Running Project Details</h1>
@@ -7,24 +13,21 @@
         </div>
         <form method="POST" action="{{ route('projectform.submit') }}">
             @csrf
-            <div class="row">
-                <div class="col-md-3 form-group mb-3">
-                    <label for="picker1">Select Related Catagory</label>
-                    <select class="form-control" name="email">
+            <div class="row align-items-end">
+                <div class="col-md-4 form-group mb-3">
+                    <label for="picker1">Select Related Category</label>
+                    <select class="form-control select2" name="email">
                         <option value="">Select Email</option>
-                         @php
-        
-    @endphp
-    @foreach($eemails as $eemail)
-        <option value="{{ $eemail->email }}">{{ $eemail->email }}</option>
-    @endforeach
+                        @foreach($eemails as $eemail)
+                            <option value="{{ $eemail->email }}">{{ $eemail->email }} ({{ $eemail->name }})</option>
+                        @endforeach
                     </select>
                     @error('email')
                         <p class="invalid-feedback">{{ $message }}</p>
                     @enderror
                 </div>
-                <div class="col-md-1 form-group mt-4">
-                    <button class="btn btn-primary" name="submit" type="Search">Submit</button>
+                <div class="col-md-auto form-group mb-3">
+                    <button class="btn btn-primary" name="submit" type="submit">Submit</button>
                 </div>
             </div>
         </form>

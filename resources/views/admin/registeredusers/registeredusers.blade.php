@@ -7,15 +7,17 @@
     </div>
 @endif
     <div class="breadcrumb">
-        <h1>Registered Users</h1>
+        <h1>Client Team Members</h1>
 
     </div>
 
     <!-- end of row-->
     <div class="row mb-4">
-
-        <a href="{{ route('register') }}" class="btn btn-link btn-success btn-just-icon remove ml-3 mb-3 px-5"><i class="material-icons">Register User</i></a>
-    <a href="" data-toggle="modal" data-target="#exampleModal"  class="btn btn-link btn-danger btn-just-icon remove ml-3 mb-3 px-5"><i class="material-icons">Announcement</i></a>
+        {{-- <a href="{{ route('register') }}" class="btn btn-success ml-3 mb-3 px-5 w-auto">Register User</a> --}}
+        <a href="javascript:void(0)" class="btn btn-success ml-3 mb-3 px-5 w-auto">Register User</a>
+        <a href="javascript:void(0)" data-toggle="modal" data-target="#exampleModal"  class="btn btn-danger ml-3 mb-3 px-5 w-auto">Announcement</a>
+        {{-- <a href="{{ route('register') }}" class="btn btn-link btn-success btn-just-icon remove ml-3 mb-3 px-5"><i class="material-icons">Register User</i></a>
+    <a href="" data-toggle="modal" data-target="#exampleModal"  class="btn btn-link btn-danger btn-just-icon remove ml-3 mb-3 px-5"><i class="material-icons">Announcement</i></a> --}}
         <!-- end of col-->
         <div class="col-md-12 mb-4">
             <div class="card text-left">
@@ -45,21 +47,26 @@
                                   <td>{{ $registereduser->id }}</td>
                                   <td>{{ $registereduser->drm_user_id }}</td>
                                   <td>{{ $registereduser->name }}</td>
-                                  <td>{{ $registereduser->cname }}</td>
+                                  <td>{{ $registereduser->cname ?? 'N/A'}}</td>
                                   <td>{{ $registereduser->email }}</td>
                                     <td>
                                         @if($registereduser->details && $registereduser->details->password)
                                             {{ $registereduser->details->password }}
+                                            asdf
                                         @else
-                                            {{ $registereduser->password }}
+                                            {{ $registereduser->password }}qwer
                                         @endif
                                     </td>
                                   <td>{{ $registereduser->role }}</td>
-                                  <td>{{ $registereduser->designation }}</td>
+                                  <td>{{ $registereduser->designation ?? 'N/A'}}</td>
                                   <td>{{ $registereduser->created_at }}</td>
                                   <td class="text-right">
-                                    <a href="{{route('admin.registeredusers.edit', $registereduser->id)}}" class="btn btn-link btn-warning btn-just-icon edit"><i class="material-icons">Edit</i></a>
-                                    <a href="{{route('admin.registeredusers.del', $registereduser->id)}}" class="btn btn-link btn-danger btn-just-icon remove"><i class="material-icons">close</i></a>
+                                        <div class="d-inline-flex gap-2">
+                                          <a href="javascript:void(0)" class="btn btn-warning edit">Edit</a>
+                                          <a href="javascript:void(0)" class="btn btn-danger remove">Delete</a>
+                                        </div>
+                                    {{-- <a href="{{route('admin.registeredusers.edit', ['id' => $registereduser->id, 'type' => 'user'])}}" class="btn btn-link btn-warning btn-just-icon edit"><i class="material-icons">Edit</i></a>
+                                    <a href="{{route('admin.registeredusers.del', $registereduser->id)}}" class="btn btn-link btn-danger btn-just-icon remove"><i class="material-icons">close</i></a> --}}
                                   </td>
                                 </tr>
                                 @endforeach

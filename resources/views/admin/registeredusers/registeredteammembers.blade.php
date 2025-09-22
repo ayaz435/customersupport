@@ -2,13 +2,23 @@
 @section('content')
 <div class="main-content">
     @if(session('success'))
-    <div id="flash-message" class="alert alert-success">
+      <div class="alert alert-success alert-dismissible fade show" role="alert" id="success-alert">
         {{ session('success') }}
-    </div>
-@endif
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <script>
+          setTimeout(function () {
+              let alert = document.getElementById('success-alert');
+              if (alert) {
+                  alert.classList.remove('show');
+                  alert.classList.add('fade');
+                  alert.style.display = 'none';
+              }
+          }, 4000);
+      </script>
+    @endif
     <div class="breadcrumb">
-        <h1>Registered Teammembers</h1>
-
+        <h1>Support Team Members</h1>
     </div>
 
     <!-- end of row-->
@@ -20,7 +30,7 @@
         <div class="col-md-12 mb-4">
             <div class="card text-left">
                 <div class="card-body">
-                    <h4 class="card-title mb-3">Language - Comma decimal place</h4>
+                    {{-- <h4 class="card-title mb-3">Language - Comma decimal place</h4> --}}
 
                     <div class="table-responsive">
                         <table class="display table table-striped table-bordered" id="comma_decimal_table" style="width:100%">
@@ -28,7 +38,7 @@
                                 <tr>
                                     <th>Id</th>
                                     <th>Name</th>
-    <th>CName</th>
+                                    <th>CName</th>
                                     <th>Email</th>
                                     <th>Password</th>
                                     <th>Role</th>
@@ -43,7 +53,7 @@
                                 <tr>
                                   <td>{{ $registereduser->id }}</td>
                                   <td>{{ $registereduser->name }}</td>
-                                  <td>{{ $registereduser->cname }}</td>
+                                  <td>{{ $registereduser->cname ?? 'N/A'}}</td>
                                   <td>{{ $registereduser->email }}</td>
                                   <td>
                                         @if($registereduser->details && $registereduser->details->password)
@@ -53,11 +63,15 @@
                                         @endif
                                     </td> 
                                   <td>{{ $registereduser->role }}</td>
-                                  <td>{{ $registereduser->designation }}</td>
+                                  <td>{{ $registereduser->designation ?? 'N/A'}}</td>
                                   <td>{{ $registereduser->created_at }}</td>
                                   <td class="text-right">
-                                    <a href="{{route('admin.registeredusers.edit', $registereduser->id)}}" class="btn btn-link btn-warning btn-just-icon edit"><i class="material-icons">Edit</i></a>
-                                    <a href="{{route('admin.registeredusers.del', $registereduser->id)}}" class="btn btn-link btn-danger btn-just-icon remove"><i class="material-icons">close</i></a>
+                                        <div class="d-inline-flex gap-2">
+                                          <a href="javascript:void(0)" class="btn btn-warning edit">Edit</a>
+                                          <a href="javascript:void(0)" class="btn btn-danger remove">Delete</a>
+                                        </div>
+                                    {{-- <a href="{{route('admin.registeredusers.edit', ['id' => $registereduser->id, 'type' => 'support'])}}" class="btn btn-link btn-warning btn-just-icon edit"><i class="material-icons">Edit</i></a>
+                                    <a href="{{route('admin.registeredusers.del', $registereduser->id)}}" class="btn btn-link btn-danger btn-just-icon remove"><i class="material-icons">close</i></a> --}}
                                   </td>
                                 </tr>
                                 @endforeach
@@ -67,7 +81,7 @@
                                 <tr>
                                     <th>Id</th>
                                     <th>Name</th>
-    <th>CName</th>
+                                    <th>CName</th>
                                     <th>Email</th>
                                     <th>Password</th>
                                     <th>Role</th>
@@ -88,7 +102,7 @@
     <!-- end of row-->
     <!-- end of main-content -->
 </div>
-// Your JavaScript file or inline script in Blade view
+{{-- // Your JavaScript file or inline script in Blade view --}}
 
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">

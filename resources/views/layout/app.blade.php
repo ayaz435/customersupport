@@ -11,6 +11,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Dashboard v4 | Gull Admin Template</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,400i,600,700,800,900" rel="stylesheet" />
     <link href="{{ asset('templateassets/css/themes/lite-purple.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('templateassets/css/plugins/perfect-scrollbar.min.css') }}" rel="stylesheet" />
@@ -327,7 +328,8 @@
 
     <script src="{{ asset('templateassets/js/plugins/jquery-3.3.1.min.js') }}"></script>
 
-    <script src="{{ asset('templateassets/js/plugins/bootstrap.bundle.min.js') }}"></script>
+    {{-- <script src="{{ asset('templateassets/js/plugins/bootstrap.bundle.min.js') }}"></script> --}}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('templateassets/js/plugins/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('templateassets/js/scripts/script.min.js') }}"></script>
     <script src="{{ asset('templateassets/js/scripts/sidebar.large.script.min.js') }}"></script>
@@ -339,6 +341,17 @@
     <script src="{{ asset('templateassets/js/scripts/widgets-statistics.min.js') }}"></script>
     <script src="{{ asset('templateassets/js/plugins/apexcharts.min.js') }}"></script>
     <script src="{{ asset('templateassets/js/scripts/apexSparklineChart.script.min.js') }}"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2({
+                placeholder: "Search email or name",
+                allowClear: true
+            });
+        });
+    </script>
     <script>
         window.addEventListener("beforeunload", function () {
             navigator.sendBeacon("/user-leaving");

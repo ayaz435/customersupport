@@ -42,6 +42,7 @@
                                         <input value="{{ old('role', $users->role) }}" name="role" class="form-control form-control-rounded" id="username" type="text">
                                         <span class="text-danger">@error('role'){{ $message }}@enderror</span>
                                     </div>
+                                        <input type="hidden" name="type" value="{{ $type }}">
                                     <button type="submit" name="submit" class="btn btn-primary btn-block btn-rounded mt-3">Update</button>
                                 </form>
                             </div>

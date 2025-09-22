@@ -45,9 +45,10 @@
                                         <label for="picker1">Role</label>
                                         <select name="role" class="form-control form-control-rounded">
                                             <option readonly>Select Role</option>
-                                            <option value="admin">admin</option>
-                                            <option value="team">team</option>
-                                            <option value="user">user</option>
+                                            <option value="admin">Admin</option>
+                                            <option value="team">Team</option>
+                                            <option value="user">User</option>
+                                            <option value="service">Service</option>
                                         </select>
                                         @error('role')
                            <p class="invalid-feedback">{{ $message}}</p>
