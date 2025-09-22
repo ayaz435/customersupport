@@ -2,10 +2,10 @@
 @section('content')
 <div class="main-content">
     @if(session('success'))
-    <div id="flash-message" class="alert alert-success">
-        {{ session('success') }}
-    </div>
-@endif
+        <div id="flash-message" class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
     <div class="breadcrumb">
         <h1>Client Team Members</h1>
 
@@ -14,15 +14,13 @@
     <!-- end of row-->
     <div class="row mb-4">
         {{-- <a href="{{ route('register') }}" class="btn btn-success ml-3 mb-3 px-5 w-auto">Register User</a> --}}
-        <a href="javascript:void(0)" class="btn btn-success ml-3 mb-3 px-5 w-auto">Register User</a>
-        <a href="javascript:void(0)" data-toggle="modal" data-target="#exampleModal"  class="btn btn-danger ml-3 mb-3 px-5 w-auto">Announcement</a>
         {{-- <a href="{{ route('register') }}" class="btn btn-link btn-success btn-just-icon remove ml-3 mb-3 px-5"><i class="material-icons">Register User</i></a>
     <a href="" data-toggle="modal" data-target="#exampleModal"  class="btn btn-link btn-danger btn-just-icon remove ml-3 mb-3 px-5"><i class="material-icons">Announcement</i></a> --}}
         <!-- end of col-->
         <div class="col-md-12 mb-4">
             <div class="card text-left">
                 <div class="card-body">
-                    <h4 class="card-title mb-3">Language - Comma decimal place</h4>
+                    {{-- <h4 class="card-title mb-3">Language - Comma decimal place</h4> --}}
 
                     <div class="table-responsive">
                         <table class="display table table-striped table-bordered" id="comma_decimal_table" style="width:100%">
@@ -37,7 +35,7 @@
                                     <th>Role</th>
                                     <th>Team Catagory</th>
                                     <th>Created Date</th>
-                                    <th>Action date</th>
+                                    {{-- <th>Action date</th> --}}
 
                                 </tr>
                             </thead>
@@ -60,14 +58,10 @@
                                   <td>{{ $registereduser->role }}</td>
                                   <td>{{ $registereduser->designation ?? 'N/A'}}</td>
                                   <td>{{ $registereduser->created_at }}</td>
-                                  <td class="text-right">
-                                        <div class="d-inline-flex gap-2">
-                                          <a href="javascript:void(0)" class="btn btn-warning edit">Edit</a>
-                                          <a href="javascript:void(0)" class="btn btn-danger remove">Delete</a>
-                                        </div>
-                                    {{-- <a href="{{route('admin.registeredusers.edit', ['id' => $registereduser->id, 'type' => 'user'])}}" class="btn btn-link btn-warning btn-just-icon edit"><i class="material-icons">Edit</i></a>
-                                    <a href="{{route('admin.registeredusers.del', $registereduser->id)}}" class="btn btn-link btn-danger btn-just-icon remove"><i class="material-icons">close</i></a> --}}
-                                  </td>
+                                  {{-- <td class="text-right">
+                                    <a href="{{route('admin.registeredusers.edit', ['id' => $registereduser->id, 'type' => 'user'])}}" class="btn btn-link btn-warning btn-just-icon edit"><i class="material-icons">Edit</i></a>
+                                    <a href="{{route('admin.registeredusers.del', $registereduser->id)}}" class="btn btn-link btn-danger btn-just-icon remove"><i class="material-icons">close</i></a>
+                                  </td> --}}
                                 </tr>
                                 @endforeach
 
@@ -97,7 +91,6 @@
     <!-- end of row-->
     <!-- end of main-content -->
 </div>
-// Your JavaScript file or inline script in Blade view
 
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">

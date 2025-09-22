@@ -44,7 +44,7 @@
                                     <th>Role</th>
                                     <th>Team Catagory</th>
                                     <th>Created Date</th>
-                                    <th>Action date</th>
+                                    {{-- <th>Action date</th> --}}
 
                                 </tr>
                             </thead>
@@ -65,14 +65,10 @@
                                   <td>{{ $registereduser->role }}</td>
                                   <td>{{ $registereduser->designation ?? 'N/A'}}</td>
                                   <td>{{ $registereduser->created_at }}</td>
-                                  <td class="text-right">
-                                        <div class="d-inline-flex gap-2">
-                                          <a href="javascript:void(0)" class="btn btn-warning edit">Edit</a>
-                                          <a href="javascript:void(0)" class="btn btn-danger remove">Delete</a>
-                                        </div>
-                                    {{-- <a href="{{route('admin.registeredusers.edit', ['id' => $registereduser->id, 'type' => 'support'])}}" class="btn btn-link btn-warning btn-just-icon edit"><i class="material-icons">Edit</i></a>
-                                    <a href="{{route('admin.registeredusers.del', $registereduser->id)}}" class="btn btn-link btn-danger btn-just-icon remove"><i class="material-icons">close</i></a> --}}
-                                  </td>
+                                  {{-- <td class="text-right">
+                                    <a href="{{route('admin.registeredusers.edit', ['id' => $registereduser->id, 'type' => 'support'])}}" class="btn btn-link btn-warning btn-just-icon edit"><i class="material-icons">Edit</i></a>
+                                    <a href="{{route('admin.registeredusers.del', $registereduser->id)}}" class="btn btn-link btn-danger btn-just-icon remove"><i class="material-icons">close</i></a>
+                                  </td> --}}
                                 </tr>
                                 @endforeach
 
@@ -87,7 +83,7 @@
                                     <th>Role</th>
                                     <th>Team Catagory</th>
                                     <th>Created Date</th>
-                                    <th>Action date</th>
+                                    {{-- <th>Action date</th> --}}
                                 </tr>
                             </tfoot>
                         </table>

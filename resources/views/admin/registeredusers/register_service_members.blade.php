@@ -21,8 +21,8 @@
     <div class="breadcrumb"> <h1>Service Team Members</h1> </div>
     <!-- end of row-->
     <div class="row mb-4">
-        <a href="javascript:void(0)" class="btn btn-success ml-3 mb-3 px-5 w-auto">Register Service User</i></a>
-        <a href="javascript:void(0)" data-toggle="modal" data-target="#exampleModal"  class="btn btn-danger ml-3 mb-3 px-5 w-auto">Announcement</a>
+        {{-- <a href="javascript:void(0)" class="btn btn-success ml-3 mb-3 px-5 w-auto">Register Service User</i></a>
+        <a href="javascript:void(0)" data-toggle="modal" data-target="#exampleModal"  class="btn btn-danger ml-3 mb-3 px-5 w-auto">Announcement</a> --}}
         <!-- end of col-->
         <div class="col-md-12 mb-4">
             <div class="card text-left">
@@ -40,7 +40,7 @@
                                     <th>Role</th>
                                     <th>Team Catagory</th>
                                     <th>Created Date</th>
-                                    <th>Action date</th>
+                                    {{-- <th>Action date</th> --}}
                                 </tr>
                             </thead>
                             <tbody>
@@ -61,14 +61,10 @@
                                     <td>{{ $registereduser->role }}</td>
                                     <td>{{ $registereduser->designation  ?? 'N/A'}}</td>
                                     <td>{{ $registereduser->created_at }}</td>
-                                    <td class="text-right">
-                                        <div class="d-inline-flex gap-2">
-                                          {{-- <a href="{{route('admin.registeredusers.edit', ['id' => $registereduser->id, 'type' => 'service'])}}" class="btn btn-warning edit">Edit</a>
-                                          <a href="{{route('admin.registeredusers.del', $registereduser->id)}}" class="btn btn-danger remove">Delete</a> --}}
-                                          <a href="javascript:void(0)" class="btn btn-warning edit">Edit</a>
-                                          <a href="javascript:void(0)" class="btn btn-danger remove">Delete</a>
-                                        </div>
-                                    </td>
+                                    {{-- <td class="text-right">
+                                        <a href="{{route('admin.registeredusers.edit', ['id' => $registereduser->id, 'type' => 'service'])}}" class="btn btn-warning edit">Edit</a>
+                                        <a href="{{route('admin.registeredusers.del', $registereduser->id)}}" class="btn btn-danger remove">Delete</a>
+                                    </td> --}}
                                   </tr>
                                 @endforeach
 
