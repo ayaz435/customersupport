@@ -44,13 +44,13 @@
                               <center></center>
                                 <div class="ul-widget__head ">
 
-                                    <div class="ul-widget__head-label"><h5>
+                                    <div class="ul-widget__head-label">
                                         @foreach ($projectforms as $index => $formData)
                                             @if ($index === 0 || $formData->eemail !== $projectforms[$index - 1]->eemail)
-                                                <b>{{ $formData->eemail }}</b>
+                                                <h4><b>{{ $formData->user->name }}</b></h4>
+                                                <h5 class="text-muted">{{ $formData->eemail }}</h5>
                                             @endif
-                                        @endforeach</h5>
-                                        <h3 class="ul-widget__head-title">Clients Data</h3>
+                                        @endforeach
                                     </div>
                                     <div class="ul-widget__head-toolbar">
                                         <ul class="nav nav-tabs nav-tabs-line nav-tabs-bold ul-widget-nav-tabs-line ul-widget-nav-tabs-line"

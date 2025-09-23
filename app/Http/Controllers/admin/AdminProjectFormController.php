@@ -29,7 +29,7 @@ class AdminProjectFormController extends Controller
         $selected_user=User::where('email', $selectedEmail)->first();
         $eemails=User::where('role', "user")->get();
         
-        $projectforms = Projectform::where('eemail', $selectedEmail)
+        $projectforms = Projectform::with('user')->where('eemail', $selectedEmail)
             ->orderBy('created_at', 'desc')
             ->get();
         $files = File::where('email', $selectedEmail)
