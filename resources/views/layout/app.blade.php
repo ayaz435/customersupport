@@ -328,8 +328,7 @@
 
     <script src="{{ asset('templateassets/js/plugins/jquery-3.3.1.min.js') }}"></script>
 
-    {{-- <script src="{{ asset('templateassets/js/plugins/bootstrap.bundle.min.js') }}"></script> --}}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('templateassets/js/plugins/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('templateassets/js/plugins/perfect-scrollbar.min.js') }}"></script>
     <script src="{{ asset('templateassets/js/scripts/script.min.js') }}"></script>
     <script src="{{ asset('templateassets/js/scripts/sidebar.large.script.min.js') }}"></script>

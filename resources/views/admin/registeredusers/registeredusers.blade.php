@@ -7,7 +7,7 @@
         </div>
     @endif
     <div class="breadcrumb">
-        <h1>Client Team Members</h1>
+        <h1>DRM Registered Clients</h1>
 
     </div>
 
@@ -50,9 +50,8 @@
                                     <td>
                                         @if($registereduser->details && $registereduser->details->password)
                                             {{ $registereduser->details->password }}
-                                            asdf
                                         @else
-                                            {{ $registereduser->password }}qwer
+                                            {{ $registereduser->password }}
                                         @endif
                                     </td>
                                   <td>{{ $registereduser->role }}</td>
