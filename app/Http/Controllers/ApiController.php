@@ -223,4 +223,52 @@ class ApiController extends Controller
         }
 
     }
+
+    public function addServiceMember(Request $request)
+    {
+        $request->validate([
+            'drm_user_id' => 'required',
+            'name' => 'required|string',
+            'email' => 'email|required|unique:users,email',
+            'password'=>'nullable|string|min:8',
+            'designation' => 'nullable|string',
+        ]);
+
+        if($request->input('password'))
+           $password= $request->input('password');
+        else
+            $password = Str::random(12);
+            
+        try {
+            $newUser = User::create([
+                'drm_user_id' => $request->input('drm_user_id'),
+                'name' => $request->input('name'),
+                'email' => $request->input('email'),
+                'designation' => $request->input('designation'),
+                'password' => Hash::make($password),
+                'role' => 'service',
+            ]);
+            if($newUser){
+                DB::table('password_text')->insert([
+                    'user_id' => $newUser->id,
+                    'password' => $password
+                ]);
+            }
+            
+            Mail::to($newUser->email)->send(new WelcomeEmail($newUser,$password));
+            
+            return response()->json([
+                'success' => true,
+                'message' => 'User created successfully.',
+                'user' => $newUser,
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to create user.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+
+    }
 }

@@ -38,7 +38,7 @@
                                     <th>Email</th>
                                     <th>Password</th>
                                     <th>Role</th>
-                                    <th>Team Catagory</th>
+                                    {{-- <th>Team Catagory</th> --}}
                                     <th>Created Date</th>
                                     {{-- <th>Action date</th> --}}
                                 </tr>
@@ -58,8 +58,8 @@
                                                N/A
                                           @endif
                                       </td>
-                                    <td>{{ $registereduser->role }}</td>
-                                    <td>{{ $registereduser->designation  ?? 'N/A'}}</td>
+                                    {{-- <td>{{ ucfirst($registereduser->role) }}</td> --}}
+                                    <td>{{ ucwords(str_replace(',', ' &', $registereduser->designation ?? 'N/A')) }}</td>
                                     <td>{{ $registereduser->created_at }}</td>
                                     {{-- <td class="text-right">
                                         <a href="{{route('admin.registeredusers.edit', ['id' => $registereduser->id, 'type' => 'service'])}}" class="btn btn-warning edit">Edit</a>

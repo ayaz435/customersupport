@@ -54,6 +54,7 @@ Route::prefix('admin')->middleware(['api.auth:sanctum','track.api.activity'])->g
     Route::put('/followup/complete-status', [AdminApiController::class, 'completedUpdateApproveStatus'])->name('api.complete.status');
     Route::get('/registered-users', [AdminApiController::class, 'registeredUsers'])->name('api.registeredusers');
     Route::get('/team', [AdminApiController::class, 'allTeam'])->name('api.allTeam');
+    Route::get('/service-members', [AdminApiController::class, 'getServiceMembers'])->name('api.getServiceMembers');
     Route::post('/announcement-inbox', [AdminApiController::class, 'announcementInbox'])->name('api.announcementInbox');
     Route::get('/index', [AdminApiController::class, 'index'])->name('api.index');
     Route::get('/tickets', [AdminApiController::class, 'tickets'])->name('api.tickets');
@@ -107,5 +108,6 @@ Route::get('designapi', [ApiController::class, 'designapi']);
 Route::get('productdesignapi', [ApiController::class, 'productdesignapi']);
 Route::post('/insert-new-customer', [ApiController::class, 'insertNewUser']);
 Route::post('/insert-new-team', [ApiController::class, 'insertNewTeam']);
+Route::post('/add-service-member', [ApiController::class, 'addServiceMember']);
 Route::put('/update-user-status', [ApiController::class, 'updateUserApprovalStatus']);
 

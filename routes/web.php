@@ -79,6 +79,7 @@ Route::group(['middleware' => ['admin.auth','track.user.activity']], function ()
         Route::get('admin/chats/chatsfetch/', [AdminChatsController::class, 'latemessage'])->name('admin.chats.chatsfetch');
         Route::get('admin/chats/user/api', [AdminChatsController::class, 'fetchUserApiData'])->name('admin.chatuser.api');
         Route::get('admin/chats/team/api', [AdminChatsController::class, 'fetchTeamApiData'])->name('admin.chatteam.api');
+        Route::get('fetch-service-members', [AdminChatsController::class, 'fetchServiceMembers'])->name('admin.service-members');
         Route::get('admin/userquestion', [AdminChatsController::class, 'userquestion'])->name('admin.userquestion');
         Route::get('admin/projectform', [AdminProjectFormController::class, 'projectform'])->name('admin.projectform');
         Route::post('inbox/store', [AdminChatsController::class, 'inboxstore'])->name('inbox.store');

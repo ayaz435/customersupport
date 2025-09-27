@@ -438,6 +438,70 @@ public function inboxstore(Request $request)
         }
     }
 
+    public function fetchServiceMembers()
+    {
+        DB::beginTransaction();
+        try{
+            $response = Http::get('https://webexcels.pk/api/service-team');
+
+            if (!$response->successful()) {
+                DB::rollBack();
+                return response()->json(['error' => 'Failed to fetch API data'], 500);
+            }
+
+            $data = json_decode($response->body(), true);
+            
+            foreach ($data['data'] as $user) {
+                // dd($user['name'],$user['user_id'],$user['email'],$user['role_name'],bcrypt('qwerasdfcvcbn'));
+                $existingUser = User::where('email', $user['email'])->first();
+
+                if(!$existingUser) {
+                    $password = Str::random(12);
+                    
+                    try{
+                        $newUser = User::create([
+                            'name' => $user['name'],
+                            'email' => $user['email'],
+                            'drm_user_id' => $user['user_id'],
+                            'designation' => $user['role_name'],
+                            'password' => bcrypt($password), 
+                            'role' => 'service',
+                        ]);
+
+                        if ($newUser) {
+                            DB::table('password_text')->insert([
+                                'user_id' => $newUser->id,
+                                'password' => $password
+                            ]);
+                        }
+                    } catch (\Exception $e) {
+                        DB::rollBack();
+                        throw $e;
+                    }
+                }else{
+                    $existingUser->update([
+                        'role' => 'service',
+                        'designation' => $user['role_name']
+                    ]);
+
+                    $existingPassword = DB::table('password_text')
+                        ->where('user_id', $existingUser->id)
+                        ->value('password');
+
+                    // Mail::to($existingUser->email)->send(new WelcomeEmail($existingUser,$existingPassword));
+                }
+            }
+            DB::commit();
+            return redirect()->route('admin.register-service')->with('success', 'Data fetched and stored successfully');
+        } catch (\Exception $e) {
+                DB::rollBack();
+                return response()->json([
+                    'error' => 'An error occurred while processing the data.',
+                    'details' => $e->getMessage(),
+                ], 500);
+            }
+    }
+
     public function latemessage(Request $request)
     {
 

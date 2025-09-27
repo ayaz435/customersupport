@@ -582,6 +582,34 @@ class AdminApiController extends Controller
             ], 500);
         }
     }
+    
+    public function getServiceMembers()
+    {
+        try {
+            $serviceMembers = User::where('role', 'service')->get();
+    
+            if ($serviceMembers->isEmpty()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'No service members found.',
+                    'service_members' => []
+                ], 404);
+            }
+    
+            return response()->json([
+                'success' => true,
+                'service_members' => $serviceMembers
+            ]);
+        } catch (Exception $e) {
+            Log::error('Error fetching service members: ' . $e->getMessage());
+    
+            return response()->json([
+                'success' => false,
+                'error' => 'An unexpected error occurred.',
+                'details' => $e->getMessage()
+            ], 500);
+        }
+    }
 
     public function announcementInbox(Request $request)
     {
