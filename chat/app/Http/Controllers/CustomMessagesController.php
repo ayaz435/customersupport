@@ -168,11 +168,17 @@ class CustomMessagesController extends ChatifyMessagesController
             ->where('active_status', 1) // Only include active agents
             ->select('id', 'name', 'avatar') // Only get necessary fields
             ->get();
-            
+
+            $serviceAgents = User::where('role', 'service')
+            ->where('id', '!=', Auth::user()->id)
+            ->where('active_status', 1)
+            ->select('id', 'name', 'avatar')
+            ->get();
             
         return response()->json([
             'status' => true,
-            'agents' => $agents
+            'agents' => $agents,
+            'service_agents' => $serviceAgents
         ]);
     }
 

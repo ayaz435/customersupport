@@ -268,6 +268,8 @@ class AuthController extends Controller
                 return redirect()->route('team.dashboard');
             case 'user':
                 return redirect()->route('homeuser.projectform');
+            case 'service':
+                return redirect()->route('team.dashboard');
             default:
                 Auth::guard('admin')->logout();
                 return redirect()->route('login')->with('error', 'You are not authorized');

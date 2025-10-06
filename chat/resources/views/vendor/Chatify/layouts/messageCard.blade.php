@@ -29,7 +29,7 @@ $timeAndSeen = "<span data-time='$created_at' class='message-time'>
     <div class="message-card-content" >
         
         @if (@$attachment->type != 'image' && @$attachment->type != 'video' || $message)
-    @if(Auth::user()->role === 'team')
+    @if(Auth::user()->role === 'team' || Auth::user()->role === 'service')
     @if ($message !== "We’re still connecting you with one of our support team members. Thank you for your patience, and we’ll be with you shortly!" && $message !== "We sincerely apologize for the delay. Our team is currently assisting other customers, but you’re important to us and we’ll respond as soon as possible. Thank you for waiting." && $message !== "We truly appreciate your patience. Our support team is still working to get to your query. If you’d prefer, you can leave your message and contact details — we’ll get back to you as soon as we can.")
             <div class="message" >
 

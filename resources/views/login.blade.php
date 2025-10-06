@@ -11,7 +11,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-    <div class="auth-layout-wrap" style="background-image: url('{{ asset('templateassets/images/photo-wide-5.jpg') }}')">
+    <div class="auth-layout-wrap" style="background-image: url('{{ asset('templateassets/images/photo-wide-9.jpg') }}?t={{ time() }}')">
         <div class="auth-content">
             <div class="absolute top-0 left-0 p-4 bg-transparent">
                 <div class="bg-transparent text-white w-50 mt-4 ml-4" style="width:500px !important;">

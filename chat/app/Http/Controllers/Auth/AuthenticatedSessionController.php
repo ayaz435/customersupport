@@ -42,7 +42,7 @@ class AuthenticatedSessionController extends Controller
         if ($authToken) {
             $user = $this->authenticateFromToken($authToken);
             
-            if ($user && in_array($user->role, ['team', 'admin','user'])) {
+            if ($user && in_array($user->role, ['team', 'admin','user', 'service'])) {
                 // Auto-login the user
                 Auth::login($user);
                 

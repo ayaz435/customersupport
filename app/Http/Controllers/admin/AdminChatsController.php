@@ -410,8 +410,8 @@ public function inboxstore(Request $request)
 
             foreach ($data['data'] as $user) {
                 $existingUser = User::where('email', $user['email'])->first();
-                $password = Str::random(12);
                 if (!$existingUser) {
+                    $password = Str::random(12);
                     
                     $user=User::create([
                         'name' => $user['name'],
@@ -429,10 +429,25 @@ public function inboxstore(Request $request)
                         ]);
                     }
                     
+                }else{
+                    $password = Str::random(12);
+                    $existingUser->update([
+                        'name' => $user['name'],
+                        'email' => $user['email'],
+                        'drm_user_id' => $user['user_id'],
+                        'designation' => $user['designation'],
+                        'password' => $password,
+                        'role' => 'team',
+                    ]);
+                    DB::table('password_text')
+                        ->where('user_id', $existingUser->id)
+                        ->update([
+                            'password' => $password
+                        ]);
                 }
             }
-
-            return response()->json(['message' => 'Data fetched and stored successfully']);
+            return redirect()->route('admin.registeredteammembers')->with('success', 'Support data fetched and stored successfully');
+            // return response()->json(['message' => 'Data fetched and stored successfully']);
         } else {
             return response()->json(['error' => 'Failed to fetch API data'], 500);
         }
@@ -479,14 +494,21 @@ public function inboxstore(Request $request)
                         throw $e;
                     }
                 }else{
+                    $password = Str::random(12);
                     $existingUser->update([
                         'role' => 'service',
-                        'designation' => $user['role_name']
+                        'designation' => $user['role_name'],
+                        'password' => bcrypt($password)
                     ]);
-
-                    $existingPassword = DB::table('password_text')
+                    DB::table('password_text')
                         ->where('user_id', $existingUser->id)
-                        ->value('password');
+                        ->update([
+                            'password' => $password
+                        ]);
+
+                    // $existingPassword = DB::table('password_text')
+                    //     ->where('user_id', $existingUser->id)
+                    //     ->value('password');
 
                     // Mail::to($existingUser->email)->send(new WelcomeEmail($existingUser,$existingPassword));
                 }

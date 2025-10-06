@@ -137,17 +137,20 @@
         {{-- Messaging area --}}
         <div class="m-body messages-container app-scroll">
             <div class="messages">
-           
-                <p class="message-hint center-el"><span>
-         @if(Auth::user()->role === 'team')
-             Hi Welcome to CustomerSupport Chat <br>
-                Plz Click on Clients Icon To start Chat
-        @elseif(Auth::user()->role === 'user')
-         Hi Welcome to CustomerSupport Chat <br>
-                Plz Click on Team Member Icon To start Chat
-        @endif
-               
-            </span></p>
+                <p class="message-hint center-el">
+                    <span>
+                        @if(Auth::user()->role === 'team')
+                            Hi Welcome to CustomerSupport Chat <br>
+                                Plz Click on Clients Icon To start Chat
+                        @elseif(Auth::user()->role === 'service')
+                            Hi Welcome to CustomerSupport Chat <br>
+                                Please Click on Clients Icon To start Chat
+                        @elseif(Auth::user()->role === 'user')
+                        Hi Welcome to CustomerSupport Chat <br>
+                                Plz Click on Team Member Icon To start Chat
+                        @endif
+                    </span>
+                </p>
             </div>
             {{-- Typing indicator --}}
             <div class="typing-indicator">
@@ -284,6 +287,8 @@ function sendMessage() {
 
             // Handle countdown based on roles
             if (data.userRole === "team") {
+                resetCountdown();
+            }elseif (data.userRole === "service") {
                 resetCountdown();
             } else if (data.userRole === "user") {
                 resetCountdown();

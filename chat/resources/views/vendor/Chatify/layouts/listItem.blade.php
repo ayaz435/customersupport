@@ -37,20 +37,22 @@
             {{-- center side --}}
             <td>
                 <p data-id="{{ $user->id }}" data-type="user">
-             @if(Auth::user()->role === 'team')
-            {{ strlen($user->cname) > 12 ? trim(substr($user->cname,0,12)).'..' : $user->cname }}
-            @elseif(Auth::user()->role === 'user')
-            {{ strlen($user->name) > 12 ? trim(substr($user->name,0,12)).'..' : $user->name }}
-            @endif
-                    
-                    <span style="font-size:10px;" class=" text-danger" data-time="{{$lastMessage->created_at}}">@php
-    $datetime = $lastMessage->created_at;
-   $date = \Carbon\Carbon::parse($datetime)->setTimezone('Asia/Karachi')->format('Y-m-d');
-    $time = \Carbon\Carbon::parse($datetime)->setTimezone('Asia/Karachi')->format('h:i:s A');
-@endphp
+                    @if(Auth::user()->role === 'team')
+                        {{ strlen($user->cname) > 12 ? trim(substr($user->cname, 0, 12)) . '..' : ($user->cname ? $user->cname : $user->name) }}
+                    @elseif(Auth::user()->role === 'service')
+                        {{ strlen($user->cname) > 12 ? trim(substr($user->cname,0,12)).'..' : ($user->cname ? $user->cname : $user->name) }}
+                    @elseif(Auth::user()->role === 'user')
+                        {{ strlen($user->name) > 12 ? trim(substr($user->name,0,12)).'..' : $user->name }}
+                    @endif
+                    <span style="font-size:10px;" class=" text-danger" data-time="{{$lastMessage->created_at}}">
+                        @php
+                            $datetime = $lastMessage->created_at;
+                            $date = \Carbon\Carbon::parse($datetime)->setTimezone('Asia/Karachi')->format('Y-m-d');
+                            $time = \Carbon\Carbon::parse($datetime)->setTimezone('Asia/Karachi')->format('h:i:s A');
+                        @endphp
 
-{{ $date }}<br>
-{{ $time }}</span>
+                        {{ $date }}<br>{{ $time }}
+                    </span>
                 </p>
                 <span>
                     {{-- Last Message user indicator --}}
@@ -79,16 +81,19 @@
             </td>
             {{-- center side --}}
             <td>
-             @if(Auth::user()->role === 'team')
-            <p data-id="{{ $user->id }}" data-type="user">
-                    {{ strlen($user->cname) > 12 ? trim(substr($user->cname,0,12)).'..' : $user->cname }}
-                </p>
-        @elseif(Auth::user()->role === 'user')
-            <p data-id="{{ $user->id }}" data-type="user">
-                    {{ strlen($user->name) > 12 ? trim(substr($user->name,0,12)).'..' : $user->name }}
-                </p>
-        @endif
-                
+                @if(Auth::user()->role === 'team')
+                    <p data-id="{{ $user->id }}" data-type="user">
+                        {{ strlen($user->cname) > 12 ? trim(substr($user->cname,0,12)).'..' : $user->cname }}
+                    </p>
+                @elseif(Auth::user()->role === 'service')
+                    <p data-id="{{ $user->id }}" data-type="service">
+                        {{ strlen($user->cname) > 12 ? trim(substr($user->cname,0,12)).'..' : $user->cname }}
+                    </p>
+                @elseif(Auth::user()->role === 'user')
+                    <p data-id="{{ $user->id }}" data-type="user">
+                        {{ strlen($user->name) > 12 ? trim(substr($user->name,0,12)).'..' : $user->name }}
+                    </p>
+                @endif
             </td>
         </tr>
     </table>
