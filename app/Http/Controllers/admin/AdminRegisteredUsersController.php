@@ -44,6 +44,36 @@ class AdminRegisteredUsersController extends Controller
             ]);
         }
     }
+
+    public function registeredSalesTeam(Request $request)
+    {
+       $salesMembers = User::with('details')
+           ->whereIn('role', ['sales'])->get();
+        if ($request->wantsJson()) {
+            return response()->json([
+                'users' => $salesMembers
+            ]);
+        } else {
+            return view('admin.registeredusers.sales_members', [
+                'sales_members' => $salesMembers
+            ]);
+        }
+    }
+
+    public function registeredDevelopmentTeam(Request $request)
+    {
+       $developmentMembers = User::with('details')
+           ->whereIn('role', ['development'])->get();
+        if ($request->wantsJson()) {
+            return response()->json([
+                'users' => $developmentMembers
+            ]);
+        } else {
+            return view('admin.registeredusers.development_members', [
+                'development_members' => $developmentMembers
+            ]);
+        }
+    }
     
     public function registeredteammembers(Request $request)
     {

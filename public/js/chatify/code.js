@@ -32,13 +32,13 @@ const setMessengerId = (id) => $("meta[name=id]").attr("content", id);
  */
 Pusher.logToConsole = chatify.pusher.debug;
 const pusher = new Pusher(chatify.pusher.key, {
-    encrypted: chatify.pusher.options.encrypted,
-    cluster: chatify.pusher.options.cluster,
-    wsHost: chatify.pusher.options.host,
-    wsPort: chatify.pusher.options.port,
-    wssPort: chatify.pusher.options.port,
-    forceTLS: chatify.pusher.options.useTLS,
-    authEndpoint: chatify.pusherAuthEndpoint,
+  encrypted: chatify.pusher.options.encrypted,
+  cluster: chatify.pusher.options.cluster,
+  wsHost: chatify.pusher.options.host,
+  wsPort: chatify.pusher.options.port,
+  wssPort: chatify.pusher.options.port,
+  forceTLS: chatify.pusher.options.useTLS,
+  authEndpoint: chatify.pusherAuthEndpoint,
   auth: {
     headers: {
       "X-CSRF-TOKEN": csrfToken,
@@ -445,13 +445,13 @@ function IDinfo(id) {
 
 
 function sendMessage() {
-   // Clear previous countdown timer
+  // Clear previous countdown timer
 
   temporaryMsgId += 1;
   let tempID = `temp_${temporaryMsgId}`;
   let hasFile = !!$(".upload-attachment").val();
   const inputValue = $.trim(messageInput.val());
-  
+
   if (inputValue.length > 0 || hasFile) {
     const formData = new FormData($("#message-form")[0]);
     formData.append("id", getMessengerId());
@@ -490,7 +490,7 @@ function sendMessage() {
         cancelAttachment();
         messageInput.focus();
 
-         // Start the countdown after sending a message
+        // Start the countdown after sending a message
       },
       success: (data) => {
         if (data.error > 0) {

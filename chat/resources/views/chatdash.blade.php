@@ -67,6 +67,10 @@
             opacity: 1;
             transform: translateY(0);
         }
+        input[type="checkbox"] {
+            margin-right: 5px;
+            margin-bottom: 8px;
+        }
     </style>
 </head>
 
@@ -110,17 +114,17 @@
                                             <div id="accordion-item-icon-right-1" class="collapse"
                                                 data-bs-parent="#accordionRightIcon">
                                                 <div class="card-body">
-                                                    <div class="d-flex justify-content-start"><input type="checkbox"
+                                                    <div class="d-flex justify-content-start"><input type="checkbox" class="checkbox"
                                                             class="mb-3 mr-2" name="selected_values[]" value="Alibaba Sales:What is Alibaba packages?"><label
                                                             for="">What is Alibaba packages?</label></div>
                                                     <br>
-                                                    <div class="d-flex justify-content-start"><input type="checkbox"
+                                                    <div class="d-flex justify-content-start"><input type="checkbox" class="checkbox"
                                                             class="mb-3 mr-2" name="selected_values[]"
                                                             value="Alibaba Sales:What are the Alibaba document requirements of Alibaba membership?"><label
                                                             for="">What are the Alibaba document requirements of Alibaba
                                                             membership?</label></div>
                                                     <br>
-                                                    <div class="d-flex justify-content-start"><input type="checkbox"
+                                                    <div class="d-flex justify-content-start"><input type="checkbox" class="checkbox"
                                                             class="mb-3 mr-2" name="selected_values[]" value="Alibaba Sales:How to register Alibaba account?"><label
                                                             for="">How to register Alibaba account?</label></div>
                                                 </div>
@@ -139,19 +143,19 @@
                                             <div id="accordion-item-icon-right-2" class="collapse"
                                                 data-bs-parent="#accordionRightIcon">
                                                 <div class="card-body">
-                                                    <div class="d-flex justify-content-start"><input type="checkbox"
+                                                    <div class="d-flex justify-content-start"><input type="checkbox" class="checkbox"
                                                             class="mb-3 mr-2" name="selected_values[]" value="Alibaba Service:How to post product?"><label for="">How
                                                             to post product?</label></div>
                                                     <br>
-                                                    <div class="d-flex justify-content-start"><input type="checkbox"
+                                                    <div class="d-flex justify-content-start"><input type="checkbox" class="checkbox"
                                                             class="mb-3 mr-2" name="selected_values[]" value="Alibaba Service:How to fill Profile?"><label for="">How
                                                             to fill Profile?</label></div>
                                                     <br>
-                                                    <div class="d-flex justify-content-start"><input type="checkbox"
+                                                    <div class="d-flex justify-content-start"><input type="checkbox" class="checkbox"
                                                             class="mb-3 mr-2" name="selected_values[]" value="Alibaba Service:How to increase Star rating?"><label
                                                             for="">How to increase Star rating?</label></div>
                                                     <br>
-                                                    <div class="d-flex justify-content-start"><input type="checkbox"
+                                                    <div class="d-flex justify-content-start"><input type="checkbox" class="checkbox"
                                                             class="mb-3 mr-2" name="selected_values[]"  value="Alibaba Service:How to recover Alibaba account?"><label
                                                             for="">How to recover Alibaba account?</label></div>
                                                 </div>
@@ -170,15 +174,15 @@
                                             <div id="accordion-item-icon-right-3" class="collapse"
                                                 data-bs-parent="#accordionRightIcon">
                                                 <div class="card-body">
-                                                    <div class="d-flex justify-content-start"><input type="checkbox"
+                                                    <div class="d-flex justify-content-start"><input type="checkbox" class="checkbox"
                                                             class="mb-3 mr-2" name="selected_values[]" value="Web Development:What is website package?"><label
                                                             for="">What is website package?</label></div>
                                                     <br>
-                                                    <div class="d-flex justify-content-start"><input type="checkbox"
+                                                    <div class="d-flex justify-content-start"><input type="checkbox" class="checkbox"
                                                             class="mb-3 mr-2" name="selected_values[]" value="Web Development:What is SEO Packages?"><label
                                                             for="">What is SEO Packages?</label></div>
                                                     <br>
-                                                    <div class="d-flex justify-content-start"><input type="checkbox"
+                                                    <div class="d-flex justify-content-start"><input type="checkbox" class="checkbox"
                                                             class="mb-3 mr-2" name="selected_values[]" value="Web Development:What is Alibaba Minisite price?"><label
                                                             for="">What is Alibaba Minisite price?</label></div>
                                                 </div>
@@ -197,22 +201,22 @@
                                             <div id="accordion-item-icon-right-4" class="collapse"
                                                 data-bs-parent="#accordionRightIcon">
                                                 <div class="card-body">
-                                                    <div class="d-flex justify-content-start"><input type="checkbox"
+                                                    <div class="d-flex justify-content-start"><input type="checkbox" class="checkbox"
                                                             class="mb-3 mr-2" name="selected_values[]"
                                                             value="Domain Hosting:What is domain registration prices?"><label
                                                             for="">What is domain registration prices?</label></div>
                                                     <br>
-                                                    <div class="d-flex justify-content-start"><input type="checkbox"
+                                                    <div class="d-flex justify-content-start"><input type="checkbox" class="checkbox"
                                                             class="mb-3 mr-2" name="selected_values[]" value="Domain Hosting:What is Hosting Packages prices?"><label
                                                             for="">What is Hosting Packages prices?</label></div>
                                                     <br>
-                                                    <div class="d-flex justify-content-start"><input type="checkbox"
+                                                    <div class="d-flex justify-content-start"><input type="checkbox" class="checkbox"
                                                             class="mb-3 mr-2" name="selected_values[]"
                                                             value="Domain Hosting:What is Unlimited hosting packages prices?"><label
                                                             for="">What is Unlimited hosting packages prices?</label>
                                                     </div>
                                                     <br>
-                                                    <div class="d-flex justify-content-start"><input type="checkbox"
+                                                    <div class="d-flex justify-content-start"><input type="checkbox" class="checkbox"
                                                             class="mb-3 mr-2" name="selected_values[]" value="Domain Hosting:What is Server price?"><label
                                                             for="">What is Server price?</label></div>
                                                 </div>
@@ -228,7 +232,7 @@
             
                 <!-- /Nested accordion -->
             </div>
-        </div><button class="btn btn-success mt-5" type="submit" name="submit">Next>></button> 
+        </div><button class="btn btn-success mt-5" type="submit" name="submit" id="nextBtn" disabled>Next>></button> 
     </div>
     </form>
     <!-- Bootstrap JS and Popper.js -->
@@ -254,6 +258,21 @@
                 }, index * 2000); // Adjust the delay as needed
             });
         });
+    </script>
+
+    <script>    // to disable next btn
+        const checkboxes = document.querySelectorAll('.checkbox');
+        const nextButton = document.getElementById('nextBtn');
+
+        function toggleNextButton() {
+            nextButton.disabled = !Array.from(checkboxes).some(checkbox => checkbox.checked);
+        }
+
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', toggleNextButton);
+        });
+
+        toggleNextButton();
     </script>
 
 </body>

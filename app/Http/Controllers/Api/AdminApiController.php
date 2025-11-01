@@ -610,6 +610,62 @@ class AdminApiController extends Controller
             ], 500);
         }
     }
+    
+    public function getSalesMembers()
+    {
+        try {
+            $saleMembers = User::where('role', 'sales')->get();
+    
+            if ($saleMembers->isEmpty()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'No sale members found.',
+                    'sale_members' => []
+                ], 404);
+            }
+    
+            return response()->json([
+                'success' => true,
+                'sale_members' => $saleMembers
+            ]);
+        } catch (Exception $e) {
+            Log::error('Error fetching sale members: ' . $e->getMessage());
+    
+            return response()->json([
+                'success' => false,
+                'error' => 'An unexpected error occurred.',
+                'details' => $e->getMessage()
+            ], 500);
+        }
+    }
+    
+    public function getDevelopmentMembers()
+    {
+        try {
+            $developmentMembers = User::where('role', 'development')->get();
+    
+            if ($developmentMembers->isEmpty()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'No development members found.',
+                    'development_members' => []
+                ], 404);
+            }
+    
+            return response()->json([
+                'success' => true,
+                'development_members' => $developmentMembers
+            ]);
+        } catch (Exception $e) {
+            Log::error('Error fetching development members: ' . $e->getMessage());
+    
+            return response()->json([
+                'success' => false,
+                'error' => 'An unexpected error occurred.',
+                'details' => $e->getMessage()
+            ], 500);
+        }
+    }
 
     public function announcementInbox(Request $request)
     {

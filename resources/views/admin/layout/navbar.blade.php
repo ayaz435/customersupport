@@ -288,8 +288,10 @@
         </ul>
         <ul class="childNav" data-parent="sessions">
             <li class="nav-item"><a href="{{ route("admin.registeredusers") }}"><i class="nav-icon i-Checked-User"></i><span class="item-name">Registered Client Team</span></a></li>
-            <li class="nav-item"><a href="{{ route("admin.registeredteammembers") }}"><i class="nav-icon i-Checked-User"></i><span class="item-name">Registered Support Team</span></a></li>
-            <li class="nav-item"><a href="{{ route("admin.register-service") }}"><i class="nav-icon i-Checked-User"></i><span class="item-name">Registered Service Team</span></a></li>
+            <li class="nav-item"><a href="{{ route("admin.registeredteammembers") }}"><i class="nav-icon i-Checked-User"></i><span class="item-name">Support Team</span></a></li>
+            <li class="nav-item"><a href="{{ route("admin.register-service") }}"><i class="nav-icon i-Checked-User"></i><span class="item-name">Service Team</span></a></li>
+            <li class="nav-item"><a href="{{ route("admin.register-sales") }}"><i class="nav-icon i-Checked-User"></i><span class="item-name">Sales Team</span></a></li>
+            <li class="nav-item"><a href="{{ route("admin.register-development") }}"><i class="nav-icon i-Checked-User"></i><span class="item-name">D&D Team</span></a></li>
         </ul>
         <ul class="childNav" data-parent="others">
             <li class="nav-item"><a href="http://demos.ui-lib.com/gull/html/sessions/not-found.html"><i class="nav-icon i-Error-404-Window"></i><span class="item-name">Not Found</span></a></li>

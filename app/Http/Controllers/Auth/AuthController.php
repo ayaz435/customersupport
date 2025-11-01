@@ -269,6 +269,10 @@ class AuthController extends Controller
             case 'user':
                 return redirect()->route('homeuser.projectform');
             case 'service':
+                return redirect()->route('homeuser.projectform');
+            case 'sales':
+                return redirect()->route('homeuser.projectform');
+            case 'development':
                 return redirect()->route('team.dashboard');
             default:
                 Auth::guard('admin')->logout();

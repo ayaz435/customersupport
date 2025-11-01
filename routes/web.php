@@ -71,8 +71,10 @@ Route::group(['middleware' => ['admin.auth','track.user.activity']], function ()
 
         Route::get('admindashboard', [AdminHomeController::class, 'index'])->name('admin.dashboard');
         Route::get('admin/registeredusers/', [AdminRegisteredUsersController::class, 'registeredusers'])->name('admin.registeredusers');
-        Route::get('admin/register-service-members/', [AdminRegisteredUsersController::class, 'registeredService'])->name('admin.register-service');
         Route::get('admin/registeredteammembers/', [AdminRegisteredUsersController::class, 'registeredteammembers'])->name('admin.registeredteammembers');
+        Route::get('admin/service-team/', [AdminRegisteredUsersController::class, 'registeredService'])->name('admin.register-service');
+        Route::get('admin/sales-team/', [AdminRegisteredUsersController::class, 'registeredSalesTeam'])->name('admin.register-sales');
+        Route::get('admin/development-team/', [AdminRegisteredUsersController::class, 'registeredDevelopmentTeam'])->name('admin.register-development');
         Route::get('admin/registeredusers/edit/{id}', [AdminRegisteredUsersController::class, 'useredit'])->name('admin.registeredusers.edit');
         Route::put('admin/registeredusers/update/{id}', [AdminRegisteredUsersController::class, 'userupdate'])->name('admin.registeredusers.update');
         Route::get('admin/registeredusers/del/{id}', [AdminRegisteredUsersController::class, 'userdel'])->name('admin.registeredusers.del');
@@ -80,6 +82,8 @@ Route::group(['middleware' => ['admin.auth','track.user.activity']], function ()
         Route::get('admin/chats/user/api', [AdminChatsController::class, 'fetchUserApiData'])->name('admin.chatuser.api');
         Route::get('admin/chats/team/api', [AdminChatsController::class, 'fetchTeamApiData'])->name('admin.chatteam.api');
         Route::get('fetch-service-members', [AdminChatsController::class, 'fetchServiceMembers'])->name('admin.service-members');
+        Route::get('fetch-sales-members', [AdminChatsController::class, 'fetchSalesMembers'])->name('admin.sales-members');
+        Route::get('fetch-development-members', [AdminChatsController::class, 'fetchDevelopmentMembers'])->name('admin.development-members');
         Route::get('admin/userquestion', [AdminChatsController::class, 'userquestion'])->name('admin.userquestion');
         Route::get('admin/projectform', [AdminProjectFormController::class, 'projectform'])->name('admin.projectform');
         Route::post('inbox/store', [AdminChatsController::class, 'inboxstore'])->name('inbox.store');

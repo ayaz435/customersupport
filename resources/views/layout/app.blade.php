@@ -467,25 +467,25 @@ $(document).ready(function() {
             setInterval(fetchUserApiData, 120000);
 
             // Function to fetch team API data
-            function fetchTeamApiData() {
-                $.ajax({
-                    type: 'GET',
-                    url: '{{ route("admin.chatteam.api") }}',
-                    dataType: 'json',
-                    success: function (response) {
-                        console.log(response.message);
-                    },
-                    error: function (error) {
-                        console.log('Error:', error);
-                    }
-                });
-            }
+            // function fetchTeamApiData() {
+            //     $.ajax({
+            //         type: 'GET',
+            //         url: '{{ route("admin.chatteam.api") }}',
+            //         dataType: 'json',
+            //         success: function (response) {
+            //             console.log(response.message);
+            //         },
+            //         error: function (error) {
+            //             console.log('Error:', error);
+            //         }
+            //     });
+            // }
 
             // Call fetchTeamApiData initially
-            fetchTeamApiData();
+            // fetchTeamApiData();
 
             // Set up a timer to call fetchTeamApiData every 15 seconds
-            setInterval(fetchTeamApiData, 120000);
+            // setInterval(fetchTeamApiData, 120000);
         });
     </script>
 

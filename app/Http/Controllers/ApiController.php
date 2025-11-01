@@ -271,4 +271,92 @@ class ApiController extends Controller
         }
 
     }
+
+    public function addUser(Request $request)
+    {
+        $request->validate([
+            'drm_user_id' => 'required',
+            'name' => 'required|string',
+            'email' => 'required|email|unique:users,email,' . $request->input('drm_user_id') . ',drm_user_id',
+            'password' => 'nullable|string|min:8',
+            'designation' => 'nullable|string',
+            'role' => 'required|in:service,sales,development',
+        ]);
+
+        $role = $request->input('role');
+        $password = $request->input('password') ?? null;
+
+        try {
+            $existingUser = User::where('email', $request->input('email'))
+                                ->orWhere('drm_user_id', $request->input('drm_user_id'))
+                                ->first();
+
+            if ($existingUser) {
+                $dataToUpdate = [];
+
+                if ($existingUser->name !== $request->input('name')) {
+                    $dataToUpdate['name'] = $request->input('name');
+                }
+
+                if ($existingUser->email !== $request->input('email')) {
+                    $dataToUpdate['email'] = $request->input('email');
+                }
+
+                if ($existingUser->designation !== $request->input('designation')) {
+                    $dataToUpdate['designation'] = $request->input('designation');
+                }
+
+                if ($existingUser->role !== $role) {
+                    $dataToUpdate['role'] = $role;
+                }
+
+                if ($password) {
+                    $dataToUpdate['password'] = Hash::make($password);
+                }
+
+                if (!empty($dataToUpdate)) {
+                    $existingUser->update($dataToUpdate);
+
+                    if ($password) {
+                        DB::table('password_text')->updateOrInsert(
+                            ['user_id' => $existingUser->id],
+                            ['password' => $password]
+                        );
+                    }
+                }
+
+                $newUser = $existingUser;
+            } else {
+                $newUser = User::create([
+                    'drm_user_id' => $request->input('drm_user_id'),
+                    'name' => $request->input('name'),
+                    'email' => $request->input('email'),
+                    'designation' => $request->input('designation'),
+                    'password' => Hash::make($password),
+                    'role' => $role,
+                ]);
+
+                DB::table('password_text')->insert([
+                    'user_id' => $newUser->id,
+                    'password' => $password,
+                ]);
+            }
+
+            Mail::to($newUser->email)->send(new WelcomeEmail($newUser, $password));
+
+            return response()->json([
+                'success' => true,
+                'message' => $existingUser ? 'User updated successfully.' : 'User created successfully from DRM.',
+                'user' => $newUser,
+            ], 200);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Failed to create or update user.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
 }

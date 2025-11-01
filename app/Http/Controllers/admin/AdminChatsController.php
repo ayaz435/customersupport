@@ -399,68 +399,68 @@ public function inboxstore(Request $request)
 }
 
 
-    public function fetchTeamApiData()
-    {
+    // public function fetchTeamApiData()
+    // {
 
-        $response = Http::get('https://webexcels.pk/api/team');
+    //     $response = Http::get('https://webexcels.pk/api/team');
 
-        if ($response->successful()) {
-            $jsonBody = $response->body();
-            $data = json_decode($jsonBody, true);
+    //     if ($response->successful()) {
+    //         $jsonBody = $response->body();
+    //         $data = json_decode($jsonBody, true);
 
-            foreach ($data['data'] as $user) {
-                $existingUser = User::where('email', $user['email'])->first();
-                if (!$existingUser) {
-                    $password = Str::random(12);
+    //         foreach ($data['data'] as $user) {
+    //             $existingUser = User::where('email', $user['email'])->first();
+    //             if (!$existingUser) {
+    //                 $password = Str::random(12);
                     
-                    $user=User::create([
-                        'name' => $user['name'],
-                        'email' => $user['email'],
-                        'drm_user_id' => $user['user_id'],
-                        'designation' => $user['designation'],
-                        'password' => $password, 
-                        'role' => 'team',
+    //                 $user=User::create([
+    //                     'name' => $user['name'],
+    //                     'email' => $user['email'],
+    //                     'drm_user_id' => $user['user_id'],
+    //                     'designation' => $user['designation'],
+    //                     'password' => $password, 
+    //                     'role' => 'team',
 
-                    ]);
-                    if($user){
-                        DB::table('password_text')->insert([
-                            'user_id' => $user->id,
-                            'password' => $password
-                        ]);
-                    }
+    //                 ]);
+    //                 if($user){
+    //                     DB::table('password_text')->insert([
+    //                         'user_id' => $user->id,
+    //                         'password' => $password
+    //                     ]);
+    //                 }
                     
-                }else{
-                    $password = Str::random(12);
-                    $existingUser->update([
-                        'name' => $user['name'],
-                        'email' => $user['email'],
-                        'drm_user_id' => $user['user_id'],
-                        'designation' => $user['designation'],
-                        'password' => $password,
-                        'role' => 'team',
-                    ]);
-                    DB::table('password_text')
-                        ->where('user_id', $existingUser->id)
-                        ->update([
-                            'password' => $password
-                        ]);
-                }
-            }
-            return redirect()->route('admin.registeredteammembers')->with('success', 'Support data fetched and stored successfully');
-            // return response()->json(['message' => 'Data fetched and stored successfully']);
-        } else {
-            return response()->json(['error' => 'Failed to fetch API data'], 500);
-        }
-    }
+    //             }else{
+    //                 $password = Str::random(12);
+    //                 $existingUser->update([
+    //                     'name' => $user['name'],
+    //                     'email' => $user['email'],
+    //                     'drm_user_id' => $user['user_id'],
+    //                     'designation' => $user['designation'],
+    //                     'password' => $password,
+    //                     'role' => 'team',
+    //                 ]);
+    //                 DB::table('password_text')
+    //                     ->where('user_id', $existingUser->id)
+    //                     ->update([
+    //                         'password' => $password
+    //                     ]);
+    //             }
+    //         }
+    //         return redirect()->route('admin.registeredteammembers')->with('success', 'Support data fetched and stored successfully');
+    //         // return response()->json(['message' => 'Data fetched and stored successfully']);
+    //     } else {
+    //         return response()->json(['error' => 'Failed to fetch API data'], 500);
+    //     }
+    // }
 
     public function fetchServiceMembers()
     {
-        DB::beginTransaction();
+        // DB::beginTransaction();
         try{
             $response = Http::get('https://webexcels.pk/api/service-team');
 
             if (!$response->successful()) {
-                DB::rollBack();
+                // DB::rollBack();
                 return response()->json(['error' => 'Failed to fetch API data'], 500);
             }
 
@@ -490,7 +490,7 @@ public function inboxstore(Request $request)
                             ]);
                         }
                     } catch (\Exception $e) {
-                        DB::rollBack();
+                        // DB::rollBack();
                         throw $e;
                     }
                 }else{
@@ -513,10 +513,153 @@ public function inboxstore(Request $request)
                     // Mail::to($existingUser->email)->send(new WelcomeEmail($existingUser,$existingPassword));
                 }
             }
-            DB::commit();
+            // DB::commit();
             return redirect()->route('admin.register-service')->with('success', 'Data fetched and stored successfully');
         } catch (\Exception $e) {
-                DB::rollBack();
+                // DB::rollBack();
+                return response()->json([
+                    'error' => 'An error occurred while processing the data.',
+                    'details' => $e->getMessage(),
+                ], 500);
+            }
+    }
+
+    public function fetchSalesMembers()
+    {
+        try{
+            $response = Http::get('https://webexcels.pk/api/sale-team');
+            if (!$response->successful()) {
+                return response()->json(['error' => 'Failed to fetch API data'], 500);
+            }
+
+            $data = json_decode($response->body(), true);
+            
+            foreach ($data['data'] as $user) {
+                // dd($user['name'],$user['user_id'],$user['email'],$user['role_name'],bcrypt('qwerasdfcvcbn'));
+                $existingUser = User::where('email', $user['email'])->first();
+
+                if(!$existingUser) {
+                    $password = Str::random(12);
+                    
+                    try{
+                        $newUser = User::create([
+                            'name' => $user['name'],
+                            'email' => $user['email'],
+                            'drm_user_id' => $user['user_id'],
+                            'designation' => $user['role_name'],
+                            'password' => $password, 
+                            'role' => 'sales',
+                        ]);
+
+                        if ($newUser) {
+                            DB::table('password_text')->insert([
+                                'user_id' => $newUser->id,
+                                'password' => $password
+                            ]);
+                        }
+                    } catch (\Exception $e) {
+                        throw $e;
+                    }
+                }else{
+                    $password = Str::random(12);
+                    $existingUser->update([
+                        'name' => $user['name'],
+                        'email' => $user['email'],
+                        'drm_user_id' => $user['user_id'],
+                        'designation' => $user['role_name'],
+                        'password' => $password,
+                        'role' => 'sales',
+                    ]);
+                    DB::table('password_text')
+                        ->where('user_id', $existingUser->id)
+                        ->update([
+                            'password' => $password
+                        ]);
+
+                    // $existingPassword = DB::table('password_text')
+                    //     ->where('user_id', $existingUser->id)
+                    //     ->value('password');
+
+                    // Mail::to($existingUser->email)->send(new WelcomeEmail($existingUser,$existingPassword));
+                }
+            }
+            return redirect()->route('admin.register-sales')->with('success', 'Data fetched and stored successfully');
+        } catch (\Exception $e) {
+                return response()->json([
+                    'error' => 'An error occurred while processing the data.',
+                    'details' => $e->getMessage(),
+                ], 500);
+            }
+    }
+
+    public function fetchDevelopmentMembers()
+    {
+        try{
+            $response = Http::get('https://webexcels.pk/api/development-department');
+
+            if (!$response->successful()) {
+                return response()->json(['error' => 'Failed to fetch API data'], 500);
+            }
+
+            $data = json_decode($response->body(), true);
+            
+            foreach ($data['data'] as $user) {
+                $existingUser = User::where('email', $user['email'])->first();
+
+                if(!$existingUser) {
+                    $password = Str::random(12);
+                    
+                    try{
+                        $newUser = User::create([
+                            'name' => $user['name'],
+                            'email' => $user['email'],
+                            'drm_user_id' => $user['user_id'],
+                            'designation' => $user['role_name'],
+                            'password' => bcrypt($password), 
+                            'role' => 'development',
+                        ]);
+
+                        if ($newUser) {
+                            DB::table('password_text')->insert([
+                                'user_id' => $newUser->id,
+                                'password' => $password
+                            ]);
+                        }
+                    } catch (\Exception $e) {
+                        throw $e;
+                    }
+                }else{
+                    $password = Str::random(12);
+                    // $existingRoles = json_decode($existingUser->role, true);
+
+                    // if (!in_array('development', $existingRoles)) {
+                    //     $existingRoles[] = 'development';
+                    // }
+
+                    $existingUser->update([
+                        'name' => $user['name'],
+                        'email' => $user['email'],
+                        'drm_user_id' => $user['user_id'],
+                        'designation' => $user['role_name'],
+                        'password' => bcrypt($password),
+                        'role' => 'development',
+                        // 'role' => json_encode($existingRoles),
+                    ]);
+                    DB::table('password_text')
+                        ->where('user_id', $existingUser->id)
+                        ->update([
+                            'password' => $password
+                        ]);
+
+                    // $existingPassword = DB::table('password_text')
+                    //     ->where('user_id', $existingUser->id)
+                    //     ->value('password');
+
+                    // Mail::to($existingUser->email)->send(new WelcomeEmail($existingUser,$existingPassword));
+                }
+            }
+            return redirect()->route('admin.register-development')->with('success', 'Data fetched and stored successfully');
+        } catch (\Exception $e) {
                 return response()->json([
                     'error' => 'An error occurred while processing the data.',
                     'details' => $e->getMessage(),
