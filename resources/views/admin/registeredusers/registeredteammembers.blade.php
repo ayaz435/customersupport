@@ -1,5 +1,19 @@
 @extends('admin.layout.navbar')
 @section('content')
+<style>
+  td, th {
+    font-size: 13px;
+  }
+  td:nth-child(4),
+  th:nth-child(4) {
+    min-width: 180px;
+  }
+
+  td:nth-child(5),
+  th:nth-child(5) {
+    min-width: 90px;
+  }
+</style>
 <div class="main-content">
     @if(session('success'))
       <div class="alert alert-success alert-dismissible fade show" role="alert" id="success-alert">
@@ -54,14 +68,12 @@
                                   <td>{{ $registereduser->id }}</td>
                                   <td>{{ $registereduser->name }}</td>
                                   <td>{{ $registereduser->cname ?? 'N/A'}}</td>
-                                  <td>{{ $registereduser->email }}</td>
-                                  <td>
-                                        @if($registereduser->details && $registereduser->details->password)
-                                            {{ $registereduser->details->password }}
-                                        @else
-                                            {{ $registereduser->password }}
-                                        @endif
-                                    </td> 
+                                  <td class="reveal-on-hover" data-value="{{ $registereduser->email }}">************@******.com</td>
+                                  @if($registereduser->details && $registereduser->details->password)
+                                      <td class="reveal-on-hover" data-value="{{ $registereduser->details->password }}">***************</td>
+                                  @else
+                                      <td class="reveal-on-hover" data-value="{{ $registereduser->password }}">***************</td>
+                                  @endif
                                   <td>{{ $registereduser->role }}</td>
                                   <td>{{ $registereduser->designation ?? 'N/A'}}</td>
                                   <td>{{ $registereduser->created_at }}</td>
@@ -130,6 +142,20 @@
   </div>
 </div>
 
-
-    
 @endsection
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.reveal-on-hover').forEach(el => {
+      const realValue = el.getAttribute('data-value');
+      const maskedValue = el.textContent.trim();
+
+      el.addEventListener('mouseenter', () => {
+        el.textContent = realValue;
+      });
+
+      el.addEventListener('mouseleave', () => {
+        el.textContent = maskedValue;
+      });
+    });
+  });
+</script>
