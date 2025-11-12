@@ -14,7 +14,7 @@
     window.chatify.allAllowedExtensions = chatify.allowedImages.concat(chatify.allowedFiles);
 </script>
 <script src="{{ asset('js/chatify/utils.js') }}"></script>
-<script src="{{ asset('js/chatify/code.js') }}"></script>
+<script src="{{ asset('js/chatify/code.js') }}?v={{ time() }}"></script>
 <script src="{{ asset('js/chatify/laravel-echo-config.js') }}"></script>
 <script src="https://simplewebrtc.com/latest-v3.js"></script>
 <script src="https://cdn.socket.io/4.1.2/socket.io.min.js"></script>

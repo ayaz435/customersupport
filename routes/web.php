@@ -81,6 +81,8 @@ Route::group(['middleware' => ['admin.auth','track.user.activity']], function ()
         Route::get('admin/chats/chatsfetch/', [AdminChatsController::class, 'latemessage'])->name('admin.chats.chatsfetch');
         Route::get('admin/chats/user/api', [AdminChatsController::class, 'fetchUserApiData'])->name('admin.chatuser.api');
         Route::get('admin/chats/team/api', [AdminChatsController::class, 'fetchTeamApiData'])->name('admin.chatteam.api');
+        // apis to fetch user data against role
+        Route::get('fetch-users', [AdminChatsController::class, 'fetchUsers'])->name('admin.users');
         Route::get('fetch-service-members', [AdminChatsController::class, 'fetchServiceMembers'])->name('admin.service-members');
         Route::get('fetch-sales-members', [AdminChatsController::class, 'fetchSalesMembers'])->name('admin.sales-members');
         Route::get('fetch-development-members', [AdminChatsController::class, 'fetchDevelopmentMembers'])->name('admin.development-members');

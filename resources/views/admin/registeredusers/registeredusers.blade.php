@@ -1,5 +1,19 @@
 @extends('admin.layout.navbar')
 @section('content')
+<style>
+  td, th {
+    font-size: 13px;
+  }
+  td:nth-child(5),
+  th:nth-child(5) {
+    min-width: 180px;
+  }
+
+  td:nth-child(6),
+  th:nth-child(6) {
+    min-width: 90px;
+  }
+</style>
 <div class="main-content">
     @if(session('success'))
         <div id="flash-message" class="alert alert-success">
@@ -46,14 +60,14 @@
                                   <td>{{ $registereduser->drm_user_id }}</td>
                                   <td>{{ $registereduser->name }}</td>
                                   <td>{{ $registereduser->cname ?? 'N/A'}}</td>
-                                  <td>{{ $registereduser->email }}</td>
-                                    <td>
-                                        @if($registereduser->details && $registereduser->details->password)
-                                            {{ $registereduser->details->password }}
-                                        @else
-                                            {{ $registereduser->password }}
-                                        @endif
-                                    </td>
+                                  <td class="reveal-on-hover" data-value="{{ $registereduser->email }}">************@******.com</td>
+                                  
+                                  @if($registereduser->details && $registereduser->details->password)
+                                      <td class="reveal-on-hover" data-value="{{ $registereduser->details->password }}">***************</td>
+                                  @else
+                                      <td class="reveal-on-hover" data-value="{{ $registereduser->password }}">***************</td>
+                                  @endif
+                                  
                                   <td>{{ $registereduser->role }}</td>
                                   <td>{{ $registereduser->designation ?? 'N/A'}}</td>
                                   <td>{{ $registereduser->created_at }}</td>
@@ -69,7 +83,7 @@
                                 <tr>
                                     <th>Id</th>
                                     <th>Name</th>
-    <th>CName</th>
+                                    <th>CName</th>
                                     <th>Email</th>
                                     <th>Password</th>
                                     <th>Role</th>
@@ -121,6 +135,20 @@
   </div>
 </div>
 
-
-    
 @endsection
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.reveal-on-hover').forEach(el => {
+      const realValue = el.getAttribute('data-value');
+      const maskedValue = el.textContent.trim();
+
+      el.addEventListener('mouseenter', () => {
+        el.textContent = realValue;
+      });
+
+      el.addEventListener('mouseleave', () => {
+        el.textContent = maskedValue;
+      });
+    });
+  });
+</script>

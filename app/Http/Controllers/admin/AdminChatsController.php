@@ -16,6 +16,7 @@ use App\Models\Followup3;
 use App\Models\Followup6;
 use App\Models\Followup9;
 use App\Models\LateMessages;
+use App\Models\Company;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -452,6 +453,66 @@ public function inboxstore(Request $request)
     //         return response()->json(['error' => 'Failed to fetch API data'], 500);
     //     }
     // }
+
+    public function fetchUsers()
+    {
+        try{
+            $response = Http::get('https://webexcels.pk/api/active-clients');
+
+            if (!$response->successful()) {
+                return response()->json(['error' => 'Failed to fetch API data'], 500);
+            }
+            $data = json_decode($response->body(), true);
+            
+            foreach ($data['data'] as $user) {
+                $existingUser = User::where('email', $user['email'])->first();
+
+                if(!$existingUser) {
+                    $password = Str::random(12);
+                    
+                    try{
+                        $newUser = User::create([
+                            'name' => $user['assigned_user'],
+                            'cname' => $user['company_name'],
+                            'email' => $user['email'],
+                            'com_id' => $user['company_id'],
+                            'drm_user_id' => $user['company_id'],
+                            'password' => bcrypt($password), 
+                            'role' => 'user',
+                        ]);
+
+                        if ($newUser) {
+                            DB::table('password_text')->insert([
+                                'user_id' => $newUser->id,
+                                'password' => $password
+                            ]);
+                        }
+                    } catch (\Exception $e) {
+                        throw $e;
+                    }
+                }else{
+                    $existingUser->update([
+                        'name' => $user['assigned_user'],
+                        'cname' => $user['company_name'],
+                        'com_id' => $user['company_id'],
+                        'role' => 'user',
+                    ]);
+
+                    // $existingPassword = DB::table('password_text')
+                    //     ->where('user_id', $existingUser->id)
+                    //     ->value('password');
+
+                    // Mail::to($existingUser->email)->send(new WelcomeEmail($existingUser,$existingPassword));
+                }
+            }
+            return redirect()->route('admin.registeredusers')->with('success', 'Data fetched and stored successfully');
+        } catch (\Exception $e) {
+                return response()->json([
+                    'error' => 'An error occurred while processing the data.',
+                    'details' => $e->getMessage(),
+                ], 500);
+            }
+    }
 
     public function fetchServiceMembers()
     {

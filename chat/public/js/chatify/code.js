@@ -33,13 +33,13 @@ const setMessengerId = (id) => $("meta[name=id]").attr("content", id);
  */
 Pusher.logToConsole = chatify.pusher.debug;
 const pusher = new Pusher(chatify.pusher.key, {
-    encrypted: chatify.pusher.options.encrypted,
-    cluster: chatify.pusher.options.cluster,
-    wsHost: chatify.pusher.options.host,
-    wsPort: chatify.pusher.options.port,
-    wssPort: chatify.pusher.options.port,
-    forceTLS: chatify.pusher.options.useTLS,
-    authEndpoint: chatify.pusherAuthEndpoint,
+  encrypted: chatify.pusher.options.encrypted,
+  cluster: chatify.pusher.options.cluster,
+  wsHost: chatify.pusher.options.host,
+  wsPort: chatify.pusher.options.port,
+  wssPort: chatify.pusher.options.port,
+  forceTLS: chatify.pusher.options.useTLS,
+  authEndpoint: chatify.pusherAuthEndpoint,
   auth: {
     headers: {
       "X-CSRF-TOKEN": csrfToken,
@@ -378,7 +378,7 @@ function errorMessageCard(id) {
 }
 
 
- 
+
 /**
  *-------------------------------------------------------------
  * Fetch id data (user/group) and update the view
@@ -457,7 +457,7 @@ function IDinfo(id) {
 function sendMessage() {
   temporaryMsgId += 1;
   let tempID = `temp_${temporaryMsgId}`;
-  console.log(tempID,temporaryMsgId)
+  console.log(tempID, temporaryMsgId)
   let hasFile = !!$(".upload-attachment").val();
   const inputValue = $.trim(messageInput.val());
   if (inputValue.length > 0 || hasFile) {
@@ -499,10 +499,10 @@ function sendMessage() {
         messageInput.focus();
       },
       success: (data) => {
-      
-        
+
+
         // add the message card coming from the server before the temp-card
-       
+
         if (data.error > 0) {
           // message card error status
           errorMessageCard(tempID);
@@ -954,31 +954,31 @@ function updateContactItem(user_id) {
 }
 
 
-$(document).ready(function() {
-    fetchContacts();
+$(document).ready(function () {
+  fetchContacts();
 
-    function fetchContacts() {
-        $.ajax({
-            url: url + "/getContactsitems", // Update this to your actual endpoint
-            method: "GET",
-            dataType: "JSON",
-            success: (data) => {
-                $(".listOfContacts").empty(); // Clear existing contacts
-                if (data.contacts && data.contacts.length > 0) {
-                    data.contacts.forEach(contact => {
-                        $(".listOfContacts").prepend(contact.contact_item);
-                    });
-                    $(".listOfContacts").find(".message-hint").hide();
-                } else {
-                    $(".listOfContacts").find(".message-hint").show();
-                }
-                cssMediaQueries(); // Update responsive design
-            },
-            error: (error) => {
-                console.error(error);
-            },
-        });
-    }
+  function fetchContacts() {
+    $.ajax({
+      url: url + "/getContactsitems", // Update this to your actual endpoint
+      method: "GET",
+      dataType: "JSON",
+      success: (data) => {
+        $(".listOfContacts").empty(); // Clear existing contacts
+        if (data.contacts && data.contacts.length > 0) {
+          data.contacts.forEach(contact => {
+            $(".listOfContacts").prepend(contact.contact_item);
+          });
+          $(".listOfContacts").find(".message-hint").hide();
+        } else {
+          $(".listOfContacts").find(".message-hint").show();
+        }
+        cssMediaQueries(); // Update responsive design
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
+  }
 });
 
 /**
@@ -1378,16 +1378,16 @@ $(document).ready(function () {
     }
     const uid = $(this).find("div.avatar").attr("data-id");
     const chatCount = $(this).find("div.avatar").attr("data-chat-count");
-    
-    if(chatCount<3){
-        setMessengerId(uid);
-        IDinfo(uid);
-        updateSelectedContact(uid);
-        routerPush(document.title, `${url}/${uid}`);
-    }else{
-        alert('This Team member fully accopied for another clients.')
+
+    if (chatCount < 3) {
+      setMessengerId(uid);
+      IDinfo(uid);
+      updateSelectedContact(uid);
+      routerPush(document.title, `${url}/${uid}`);
+    } else {
+      alert('This Team member fully accopied for another clients.')
     }
-    
+
     /*setMessengerId(uid);
     IDinfo(uid);
     updateSelectedContact(uid);
@@ -1417,7 +1417,7 @@ $(document).ready(function () {
     sendMessage();
   });
 
- 
+
 
   // message input on keyup [Enter to send, Enter+Shift for new line]
   $("#message-form .m-send").on("keyup", (e) => {

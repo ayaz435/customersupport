@@ -269,9 +269,9 @@ class AuthController extends Controller
             case 'user':
                 return redirect()->route('homeuser.projectform');
             case 'service':
-                return redirect()->route('homeuser.projectform');
+                return redirect()->route('team.dashboard');
             case 'sales':
-                return redirect()->route('homeuser.projectform');
+                return redirect()->route('team.dashboard');
             case 'development':
                 return redirect()->route('team.dashboard');
             default:
